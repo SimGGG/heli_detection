@@ -119,11 +119,11 @@ def check_augmentation_images(image, annotation):
     cv2.waitKey(0)
 
 
-def save_augmentation_images(images, annotations, dir):
+def save_augmentation_images(images, annotations, dir, num_aug):
     for idx in tqdm.tqdm(range(len(images))):
         bbs = read_bbs(images[idx], annotations[idx])
         file_idx = 0
-        for _ in range(30):
+        for _ in range(num_aug):
             image_aug, bbs_aug = do_augmentation(images[idx], bbs)
             new_image_file = dir + f'aug_{file_idx}_' + annotations[idx][2]
             cv2.imwrite(new_image_file, image_aug)
@@ -149,6 +149,10 @@ def main():
                              "Defaults to the same directory as XML_DIR.",
                         type=str, default=None)
 
+    parser.add_argument("-n",
+                        "--num_augmentation",
+                        type=int, default=None)
+
     args = parser.parse_args()
 
     print('Read Datasets.. ')
@@ -157,7 +161,7 @@ def main():
 
     # check_augmentation_images(images[3], annotations[3])
     print('\nDo Augmentation.. ')
-    save_augmentation_images(images, annotations, args.image_dir)
+    save_augmentation_images(images, annotations, args.image_dir, args.num_augmentation)
 
 
 
