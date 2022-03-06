@@ -170,3 +170,5 @@ def main(_):
 
 if __name__ == '__main__':
     tf.app.run()
+
+/home/user/Helipad_Detection/workspace/pre-trained-models/mask_rcnn_inception_resnet_v2_1024x1024_coco17_gpu-8/pipeline.config

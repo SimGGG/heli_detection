@@ -1,3 +1,5 @@
 images/
 models/
 pre-trained-models/
+annotations/
+exported-models/

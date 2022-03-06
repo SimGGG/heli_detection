@@ -1,17 +1,13 @@
-import io
 import os
 import glob
-import scipy.misc
 import numpy as np
-import six
 import time
 
 from six import BytesIO
 
-import matplotlib
 import matplotlib.pyplot as plt
 import cv2
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 from object_detection.utils import visualization_utils as viz_utils
 
 import tensorflow as tf
@@ -92,28 +88,17 @@ def inference_model(detect_fn, image):
             min_score_thresh=.40,
             agnostic_mode=False)
 
-    # cv2.imshow('image_before', cv2.resize(image_np, (380, 640)))
-    # cv2.imshow('image_after', cv2.resize(image_np, (380, 640)))
-    # cv2.waitKey(0)
-    P_image = Image.fromarray(image_np_with_detections)
-    P_image.show()
-
+    return image_np, image_np_with_detections
 
 
 if __name__ == "__main__":
-
     detect_fn = load_model(model_path)
     elapsed = []
-    rand_idx = np.random.choice(len(image_path), 1)
-    image_path = image_path[rand_idx[0]]
-    inference_model(detect_fn, image_path)
 
-    # if len(image_path) >= 5:
-    #     random_indices = np.random.choice(len(image_path), 5, replace=False)
-    #     image_path = [image_path[idx] for idx in random_indices]
-    #
-    # for image in image_path:
-    #     inference_model(detect_fn, image)
+    for raw_image_path in image_path:
+        fnm = raw_image_path.split('/')[-1]
+        out_fnm = fnm.split('.')[0] + '_out.' + fnm.split('.')[-1]
+        out_image_path = raw_image_path.replace(fnm, out_fnm)
 
-    # mean_elapsed = sum(elapsed) / float(len(elapsed))
-    # print('Elapsed time: ' + str(mean_elapsed) + ' second per image')
+        image_np, image_np_with_detections = inference_model(detect_fn, raw_image_path)
+        cv2.imwrite(out_image_path, image_np_with_detections)
