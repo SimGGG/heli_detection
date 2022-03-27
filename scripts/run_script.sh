@@ -23,24 +23,27 @@
 #--model_dir=../models/heli_FRCNN_RESN152 \
 #--pipeline_config_path=../models/heli_FRCNN_RESN152/pipeline.config \
 
-# Mask R-CNN Inception ResNet V2 1024x1024
+
+# Faster R-CNN ResNet152 V1 1024x1024
 #python model_main_tf2.py \
-#--model_dir=../models/heli_MRCNN_INCP_RESN_v2_1024x1024 \
-#--pipeline_config_path=../models/heli_MRCNN_INCP_RESN_v2_1024x1024/pipeline.config \
+#--model_dir=../models/stanford_SSD_RESN_v1_1024x1024 \
+#--pipeline_config_path=../models/stanford_SSD_RESN_v1_1024x1024/pipeline.config \
+
+
 
 
 ### Export Model ###
 #python exporter_main_v2.py \
 #--input_type image_tensor \
-#--pipeline_config_path ../models/heli_FRCNN_RESN152/pipeline.config \
-#--trained_checkpoint_dir ../models/heli_FRCNN_RESN152/ \
-#--output_directory ../exported-models/heli_FRCNN_RESN152
+#--pipeline_config_path ../models/stanford_SSD_RESN_v1_1024x1024/pipeline.config \
+#--trained_checkpoint_dir ../models/stanford_SSD_RESN_v1_1024x1024/ \
+#--output_directory ../exported-models/stanford_SSD_RESN_v1_1024x1024
 
 
 ### Inference ###
 python inference_model.py \
---model_path ../exported-models/heli_FRCNN_RESN152 \
---image_dir ../images/inf2
+--model_path ../exported-models/stanford_SSD_RESN_v1_1024x1024 \
+--image_dir ../images/inf
 
 
 ### Tensorboard usage ###
@@ -56,4 +59,5 @@ python inference_model.py \
 
 # <MODEL LIST>
 # 1. heli_SSD_MBN
-# 2. heli_SSD_MBN_google
+# 2. heli_FRCNN_RESN152
+# 3. stanford_SSD_RESN_v1_1024x1024

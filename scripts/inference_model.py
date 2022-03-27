@@ -25,7 +25,13 @@ image_path = []
 for ext in ('*.png', '*.jpg', '*.jpeg'):
     image_path += glob.glob(os.path.join(image_dir, ext))
 
-category_index = {1 : {'id' : 1, 'name':'helipad'}}
+category_index = {1 : {'id' : 1, 'name':'helipad'},
+                  2 : {'id' : 2, 'name':'Pedestrian'},
+                  3 : {'id' : 3, 'name':'Biker'},
+                  4 : {'id' : 4, 'name':'Skater'},
+                  5 : {'id' : 5, 'name':'Cart'},
+                  6 : {'id' : 6, 'name':'Bus'},
+                  7 : {'id' : 7, 'name':'Car'}}
 
 # model_path = './exported_models/heli_ssd_mobile_v2_0104/saved_model'
 # test_image_dir = './images/test'
@@ -72,7 +78,7 @@ def inference_model(detect_fn, image):
     start_time = time.time()
     detections = detect_fn(input_tensor)
     end_time = time.time()
-    # elapsed.append(end_time - start_time)
+    elapsed.append(end_time - start_time)
 
     plt.rcParams['figure.figsize'] = [42, 21]
     label_id_offset = 1

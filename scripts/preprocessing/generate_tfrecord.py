@@ -157,6 +157,7 @@ def main(_):
     writer = tf.python_io.TFRecordWriter(args.output_path)
     path = os.path.join(args.image_dir)
     examples = xml_to_csv(args.xml_dir)
+
     grouped = split(examples, 'filename')
     for group in grouped:
         tf_example = create_tf_example(group, path)
@@ -170,5 +171,3 @@ def main(_):
 
 if __name__ == '__main__':
     tf.app.run()
-
-/home/user/Helipad_Detection/workspace/pre-trained-models/mask_rcnn_inception_resnet_v2_1024x1024_coco17_gpu-8/pipeline.config
