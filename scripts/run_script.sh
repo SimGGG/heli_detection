@@ -19,25 +19,24 @@
 #--pipeline_config_path=../models/heli_SSD_MBN/pipeline.config \
 
 # Faster R-CNN ResNet152 V1 1024x1024
-#python model_main_tf2.py \
-#--model_dir=../models/heli_FRCNN_RESN152 \
-#--pipeline_config_path=../models/heli_FRCNN_RESN152/pipeline.config \
+python model_main_tf2.py \
+--model_dir=../models/stanford_FRCNN_RESN152 \
+--pipeline_config_path=../models/stanford_FRCNN_RESN152/pipeline.config \
 
 
-# Faster R-CNN ResNet152 V1 1024x1024
+# SSD ResNet50 V1 FPN 1024x1024 (RetinaNet50)
 #python model_main_tf2.py \
 #--model_dir=../models/stanford_SSD_RESN_v1_1024x1024 \
 #--pipeline_config_path=../models/stanford_SSD_RESN_v1_1024x1024/pipeline.config \
 
 
 
-
 ### Export Model ###
-#python exporter_main_v2.py \
-#--input_type image_tensor \
-#--pipeline_config_path ../models/stanford_SSD_RESN_v1_1024x1024/pipeline.config \
-#--trained_checkpoint_dir ../models/stanford_SSD_RESN_v1_1024x1024/ \
-#--output_directory ../exported-models/stanford_SSD_RESN_v1_1024x1024
+python exporter_main_v2.py \
+--input_type image_tensor \
+--pipeline_config_path ../models/stanford_FRCNN_RESN152/pipeline.config \
+--trained_checkpoint_dir ../models/stanford_FRCNN_RESN152/ \
+--output_directory ../exported-models/stanford_FRCNN_RESN152
 
 
 ### Inference ###
