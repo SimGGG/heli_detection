@@ -22,16 +22,12 @@ model_path = os.path.join(args.model_path, 'saved_model/')
 image_dir = args.image_dir
 
 image_path = []
-for ext in ('*.png', '*.jpg', '*.jpeg'):
+for ext in ('*.png', '*.jpg', '*.jpeg', "*.JPG"):
     image_path += glob.glob(os.path.join(image_dir, ext))
 
 category_index = {1 : {'id' : 1, 'name':'helipad'},
-                  2 : {'id' : 2, 'name':'Pedestrian'},
-                  3 : {'id' : 3, 'name':'Biker'},
-                  4 : {'id' : 4, 'name':'Skater'},
-                  5 : {'id' : 5, 'name':'Cart'},
-                  6 : {'id' : 6, 'name':'Bus'},
-                  7 : {'id' : 7, 'name':'Car'}}
+                  2 : {'id' : 2, 'name':'Vehicle'},
+                  3 : {'id' : 3, 'name':'Person'},}
 
 # model_path = './exported_models/heli_ssd_mobile_v2_0104/saved_model'
 # test_image_dir = './images/test'
@@ -72,8 +68,8 @@ def load_model(model_path):
 
 
 # Inference
-def inference_model(detect_fn, image):
-    image_np = load_image_into_numpy_array(image)
+def inference_model(detect_fn, image_path):
+    image_np = load_image_into_numpy_array(image_path)
     input_tensor = np.expand_dims(image_np, 0)
     start_time = time.time()
     detections = detect_fn(input_tensor)
@@ -104,7 +100,8 @@ if __name__ == "__main__":
     for raw_image_path in image_path:
         fnm = raw_image_path.split('/')[-1]
         out_fnm = fnm.split('.')[0] + '_out.' + fnm.split('.')[-1]
-        out_image_path = raw_image_path.replace(fnm, out_fnm)
 
+        print(raw_image_path)
+        out_image_path = raw_image_path.replace(fnm, out_fnm)
         image_np, image_np_with_detections = inference_model(detect_fn, raw_image_path)
         cv2.imwrite(out_image_path, image_np_with_detections)

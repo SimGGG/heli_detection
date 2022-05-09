@@ -3,3 +3,4 @@ models/
 pre-trained-models/
 annotations/
 exported-models/
+.ipynb_checkpoints/

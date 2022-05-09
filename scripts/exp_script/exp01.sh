@@ -2,20 +2,23 @@
 # Experiment name : exp01
 # Fine-Tuned model : SSD ResNet50 V1 FPN 1024x1024 (RetinaNet50)
 # Datasets : 0501_data(car, helipad / not augmented)
+# Issue :
+#         1. Cannot find vehicle
+#         2.
 ##################################################################
 
 ### Model Training ###
-#python ../model_main_tf2.py \
-#--model_dir=/home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50 \
-#--pipeline_config_path=/home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50/pipeline.config \
+python ../model_main_tf2.py \
+--model_dir=/home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50 \
+--pipeline_config_path=/home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50/pipeline.config \
 
 
 ### Export Model ###
-#python ../exporter_main_v2.py \
-#--input_type image_tensor \
-#--pipeline_config_path /home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50/pipeline.config \
-#--trained_checkpoint_dir /home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50 \
-#--output_directory /home/user/Helipad_Detection/workspace/exported-models/exp01_RetinaNet50
+python ../exporter_main_v2.py \
+--input_type image_tensor \
+--pipeline_config_path /home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50/pipeline.config \
+--trained_checkpoint_dir /home/user/Helipad_Detection/workspace/models/exp01_RetinaNet50 \
+--output_directory /home/user/Helipad_Detection/workspace/exported-models/exp01_RetinaNet50
 
 
 ### Inference ###
